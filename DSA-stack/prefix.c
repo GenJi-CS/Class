@@ -44,27 +44,23 @@ int evaluatePrefix(char *expression)
 
     int len = strlen(expression);
 
-    // Traverse the expression from right to left
     for (int i = len - 1; i >= 0; i--)
     {
         char ch = expression[i];
 
         if (isdigit(ch))
         {
-            // Push operand to stack
             push(&stack, ch - '0');
         }
         else if (ch == ' ' || ch == '\t')
         {
-            continue; // Skip spaces or tabs
+            continue;
         }
         else
         {
-            // Pop two operands from the stack
             int val1 = pop(&stack);
             int val2 = pop(&stack);
 
-            // Perform the operation and push the result
             switch (ch)
             {
             case '+':
@@ -94,7 +90,6 @@ int evaluatePrefix(char *expression)
         }
     }
 
-    // Final result in the stack
     return pop(&stack);
 }
 
@@ -104,7 +99,6 @@ int main()
     printf("Enter a prefix expression: ");
     fgets(prefix, MAX, stdin);
 
-    // Remove newline character if present
     prefix[strcspn(prefix, "\n")] = '\0';
 
     int result = evaluatePrefix(prefix);
